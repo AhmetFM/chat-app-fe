@@ -1,29 +1,37 @@
+import { router } from "expo-router";
 import React from "react";
-import { Image, Text, TouchableOpacity } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const logo = require("../../assets/images/chatter-logo.png");
-
-const Welcome = () => {
+const SignIn = () => {
   return (
-    <SafeAreaView className="flex-1 items-center">
-      <Image className=" w-2/3 h-3/5" source={logo} />
-      <Text className="text-4xl font-bold w-1/2 text-center mb-8">
-        Welcome to Chatter
-      </Text>
-      <Text className="text-lg font-medium text-gray-600">
-        Start chatting with your friends
-      </Text>
-      <Text className="text-lg font-medium text-gray-600">
-        Sign in to get started
-      </Text>
-      <TouchableOpacity className="bg-blue-500 w-1/2 mt-6 rounded-2xl">
-        <Text className="text-white font-semibold px-12 py-6 rounded-2xl text-center">
-          Continue
+    <SafeAreaView className="flex-1 items-center justify-between dark:bg-black">
+      <View className="w-full items-center px-6 mt-20">
+        <Text className="text-4xl font-bold text-black dark:text-white text-center">
+          Welcome to Chatter
         </Text>
-      </TouchableOpacity>
+        <Text className="mt-4 text-center text-gray-600 dark:text-gray-300">
+          There is no email sign-in. Continue with your phone number like
+          WhatsApp.
+        </Text>
+      </View>
+
+      <View className="w-full px-6 mb-10">
+        <TouchableOpacity
+          className="rounded-2xl bg-green-500 dark:bg-green-700 py-4"
+          activeOpacity={0.9}
+          onPress={() => router.replace("/(auth)/sign-in")}
+        >
+          <Text className="text-center text-white text-lg font-semibold">
+            Agree & Continue
+          </Text>
+        </TouchableOpacity>
+        <Text className="mt-4 text-center text-xs text-gray-500 dark:text-gray-400">
+          By continuing, you agree to the Terms of Service and Privacy Policy.
+        </Text>
+      </View>
     </SafeAreaView>
   );
 };
 
-export default Welcome;
+export default SignIn;
