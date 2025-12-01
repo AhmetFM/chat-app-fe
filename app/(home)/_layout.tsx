@@ -1,11 +1,9 @@
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
-import { Tabs, useSegments } from "expo-router";
+import { Tabs } from "expo-router";
 import React from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 const HomeLayout = () => {
-  const segments = useSegments();
-
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <Tabs>
@@ -29,7 +27,6 @@ const HomeLayout = () => {
             ),
             tabBarStyle: {
               backgroundColor: "#f5f5f5",
-              // display: segments[2] === "[id]" ? "none" : "flex",
             },
           }}
         />

@@ -27,7 +27,7 @@ const SingleChatRow = ({
   unreadCount,
 }: SingleChatRowProps) => {
   return (
-    <Link href={`/(home)/chats/${id}`} asChild>
+    <Link href={`/(details)/${id}`} asChild>
       <TouchableHighlight activeOpacity={0.6} underlayColor="#f0f0f0">
         <View className="w-full h-20 flex-row items-center gap-[14px] pl-5 py-[10px]">
           {/* Profile Img */}
