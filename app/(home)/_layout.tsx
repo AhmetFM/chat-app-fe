@@ -15,6 +15,9 @@ const HomeLayout = () => {
             tabBarIcon: ({ color, size }) => (
               <MaterialIcons name="update" color={color} size={size} />
             ),
+            tabBarStyle: {
+              backgroundColor: "#f5f5f5",
+            },
           }}
         />
         <Tabs.Screen
@@ -38,6 +41,9 @@ const HomeLayout = () => {
             tabBarIcon: ({ color, size }) => (
               <Ionicons name="settings" color={color} size={size} />
             ),
+            tabBarStyle: {
+              backgroundColor: "#f5f5f5",
+            },
           }}
         />
       </Tabs>
