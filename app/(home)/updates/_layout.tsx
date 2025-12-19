@@ -33,6 +33,7 @@ const UpdatesLayout = () => {
         options={{
           title: "",
           headerShown: false,
+          animation: "none",
         }}
       />
     </Stack>

@@ -1,4 +1,4 @@
-import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import { FontAwesome6, Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
 import React from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
@@ -6,7 +6,11 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 const HomeLayout = () => {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <Tabs>
+      <Tabs
+        screenOptions={{
+          tabBarActiveTintColor: "#1DAB61",
+        }}
+      >
         <Tabs.Screen
           name="updates"
           options={{
@@ -14,6 +18,19 @@ const HomeLayout = () => {
             title: "Updates",
             tabBarIcon: ({ color, size }) => (
               <MaterialIcons name="update" color={color} size={size} />
+            ),
+            tabBarStyle: {
+              backgroundColor: "#f5f5f5",
+            },
+          }}
+        />
+        <Tabs.Screen
+          name="friends"
+          options={{
+            headerShown: false,
+            title: "Friends",
+            tabBarIcon: ({ color, size }) => (
+              <FontAwesome6 name="contact-book" size={size} color={color} />
             ),
             tabBarStyle: {
               backgroundColor: "#f5f5f5",

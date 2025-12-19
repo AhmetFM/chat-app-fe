@@ -9,8 +9,14 @@ export default function RootLayout() {
   return (
     <AuthProvider>
       <Stack>
-        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-        <Stack.Screen name="(home)" options={{ headerShown: false }} />
+        <Stack.Screen
+          name="(auth)"
+          options={{ headerShown: false, animation: "fade" }}
+        />
+        <Stack.Screen
+          name="(home)"
+          options={{ headerShown: false, animation: "fade" }}
+        />
         <Stack.Screen name="(details)" options={{ headerShown: false }} />
         <Stack.Screen name="index" options={{ headerShown: false }} />
         <Stack.Screen

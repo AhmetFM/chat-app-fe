@@ -29,10 +29,22 @@ const SignIn = () => {
 
     try {
       setLoading(true);
-      // TODO: Replace with real API call
-      const fakeToken = "demo-token";
-      await AsyncStorage.setItem("token", fakeToken);
-      setUserToken(fakeToken);
+
+      const response = await fetch("http://192.168.68.101:3000/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+      const result = await response.json();
+
+      if (!response.ok) {
+        setError(result.message);
+        return;
+      }
+      await AsyncStorage.setItem("token", result.refreshToken);
+      setUserToken(result.accessToken);
       router.replace("/");
     } catch (e) {
       setError("Failed to sign in. Please try again.");

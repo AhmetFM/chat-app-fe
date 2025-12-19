@@ -1,13 +1,14 @@
-[{
+[
+  {
     "id": "1",
     "from": "Murat",
     "date": "Wed Sep 10 2008 01:23:35 GMT+0200 (Central European Summer Time)",
-    "img": "https://avatars.githubusercontent.com/u/74562743?v=4",
+    "img": "",
     "msg": "Deneme mesaj",
     "read": true,
     "unreadCount": 2
-},
-{
+  },
+  {
     "id": "2",
     "from": "Mami",
     "date": "Wed Sep 10 2008 01:23:35 GMT+0200 (Central European Summer Time)",
@@ -15,8 +16,8 @@
     "msg": "Deneme mesaj 2",
     "read": true,
     "unreadCount": 0
-},
-{
+  },
+  {
     "id": "3",
     "from": "Samet",
     "date": "Wed Sep 10 2008 01:23:35 GMT+0200 (Central European Summer Time)",
@@ -24,9 +25,8 @@
     "msg": "Deneme mesaj 2",
     "read": true,
     "unreadCount": 0
-}
-,
-{
+  },
+  {
     "id": "4",
     "from": "Deneme aaaaaaaaaa",
     "date": "Wed Sep 10 2008 01:23:35 GMT+0200 (Central European Summer Time)",
@@ -34,5 +34,5 @@
     "msg": "Deneme mesaj 2",
     "read": true,
     "unreadCount": 0
-}
+  }
 ]

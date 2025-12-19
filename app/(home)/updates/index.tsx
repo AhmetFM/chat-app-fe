@@ -18,7 +18,7 @@ const Updates = () => {
           <Text className="text-xl font-medium">Status</Text>
           <AddMyStatus />
         </View>
-        <View className="mx-5 my-4 gap-8">
+        <View className="mx-5 my-4 gap-5">
           <Text className="text-gray-600 text-lg">Recent Updates</Text>
           <SingleUpdate opened={false} id={"1"} />
           <SingleUpdate opened={true} id={"2"} />

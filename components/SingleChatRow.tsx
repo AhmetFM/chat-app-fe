@@ -2,10 +2,8 @@ import { format } from "date-fns";
 import React from "react";
 import { Image, Text, TouchableHighlight, View } from "react-native";
 
-import noProfileImage from "@/assets/images/no-profile-image.svg";
+import { FontAwesome } from "@expo/vector-icons";
 import { Link } from "expo-router";
-
-const no_profile_image = Image.resolveAssetSource(noProfileImage).uri;
 
 export interface SingleChatRowProps {
   id: string;
@@ -31,10 +29,16 @@ const SingleChatRow = ({
       <TouchableHighlight activeOpacity={0.6} underlayColor="#f0f0f0">
         <View className="w-full h-20 flex-row items-center gap-[14px] pl-5 py-[10px]">
           {/* Profile Img */}
-          <Image
-            className="w-[50px] h-[50px] rounded-full"
-            source={{ uri: img ? img : no_profile_image }}
-          />
+          {img ? (
+            <Image
+              className="w-[50px] h-[50px] rounded-full"
+              source={{ uri: img }}
+            />
+          ) : (
+            <View className="w-[50px] h-[50px] rounded-full items-center justify-center bg-gray-500">
+              <FontAwesome name="user" size={24} color="white" />
+            </View>
+          )}
 
           <View className="flex-1">
             {/* Title, lastMessage and date. */}
@@ -50,7 +54,7 @@ const SingleChatRow = ({
               {format(date, "MM.dd.yy")}
             </Text>
             {unreadCount >= 1 && (
-              <Text className="w-[18px] h-[18px] rounded-full self-end mr-4 text-center font-semibold  text-white bg-green-600">
+              <Text className="w-[18px] h-[18px] rounded-full self-end mr-4 text-sm text-center font-semibold  text-white bg-green-600">
                 {unreadCount}
               </Text>
             )}
