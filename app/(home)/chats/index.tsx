@@ -1,5 +1,5 @@
-import dummyChats from "@/assets/data/chats.json";
 import SingleChatRow from "@/components/SingleChatRow";
+import useChats from "@/hooks/useChats";
 import React, { useState } from "react";
 import {
   FlatList,
@@ -10,20 +10,21 @@ import {
   View,
 } from "react-native";
 
-const Chats = () => {
-  const separatorHeight = StyleSheet.hairlineWidth;
+const separatorHeight = StyleSheet.hairlineWidth;
 
+const Chats = () => {
   const FILTERS = ["All", "Unread", "Favorites", "Groups", "+"];
 
-  const [chats, setChats] = useState([1, 2, 3]);
   const [selectedFilter, setSelectedFilter] = useState(0);
 
-  //TODO:Fetch user chats and display them
+  const { chats, loading } = useChats();
+
+  if (loading) return null;
 
   return (
     <View className="flex-1 dark:bg-black">
-      {chats.length <= 0 ? (
-        <View className="flex-1 dark:bg-black flex items-center justify-center">
+      {chats === 0 ? (
+        <View className="flex-1 bg-[#f5f5f5] dark:bg-black flex items-center justify-center">
           <Text className="dark:text-white">
             Start conversations with pressing plus button
           </Text>
@@ -44,7 +45,7 @@ const Chats = () => {
             ))}
           </View>
           <FlatList
-            data={dummyChats}
+            data={chats}
             renderItem={({ item }) => <SingleChatRow {...item} />}
             keyExtractor={(item) => item.id.toString()}
             ItemSeparatorComponent={() => (

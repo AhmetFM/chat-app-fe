@@ -1,4 +1,5 @@
 import { AuthContext } from "@/context/AuthContext";
+import { register } from "@/services/auth.service";
 import { saveToken } from "@/utils/storage";
 import { router } from "expo-router";
 import React, { useContext, useState } from "react";
@@ -47,20 +48,13 @@ const SignUp = () => {
     }
     try {
       setLoading(true);
-      // TODO: Replace with real API call
-      const response = await fetch("http://192.168.68.101:3000/auth/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password, name: username }),
-      });
-      const result = await response.json();
 
-      if (!response.ok) {
-        setError(result.message);
-        return;
-      }
+      const result = await register({
+        email,
+        name: username,
+        password,
+      });
+
       await saveToken(result.refreshToken);
       setUserToken(result.accessToken);
 

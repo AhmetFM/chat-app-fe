@@ -1,6 +1,7 @@
-import messageData from "@/assets/data/messages.json";
+import useChat from "@/hooks/useChat";
 import { Ionicons } from "@expo/vector-icons";
-import React, { useCallback, useEffect, useState } from "react";
+import { useLocalSearchParams } from "expo-router";
+import React, { useState } from "react";
 import { ImageBackground, Platform, View } from "react-native";
 import {
   Bubble,
@@ -12,9 +13,12 @@ import {
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const Chat = () => {
-  const [messages, setMessages] = useState<any>([]);
   const insets = useSafeAreaInsets();
+  const { id: conversationId } = useLocalSearchParams();
+  //const [messages, setMessages] = useState<any>([]);
   const [text, setText] = useState("");
+
+  const { messages, sendMessage, userId } = useChat(conversationId as string);
 
   // If you have a tab bar, include its height
   const tabbarHeight = 50;
@@ -22,7 +26,7 @@ const Chat = () => {
   const keyboardVerticalOffset =
     insets.bottom + tabbarHeight + keyboardTopToolbarHeight;
 
-  useEffect(() => {
+  /* useEffect(() => {
     setMessages([
       ...messageData.map((message) => ({
         _id: message.id,
@@ -51,7 +55,7 @@ const Chat = () => {
       GiftedChat.append(previousMessages, messages)
     );
   }, []);
-
+ */
   return (
     <ImageBackground
       source={{ uri: "https://i.redd.it/qwd83nc4xxf41.jpg" }}
@@ -63,8 +67,8 @@ const Chat = () => {
     >
       <GiftedChat
         messages={messages}
-        onSend={(messages: any) => onSend(messages)}
-        user={{ _id: 1 }}
+        onSend={sendMessage}
+        user={{ _id: userId as string }}
         renderSystemMessage={(props) => (
           <SystemMessage
             containerStyle={{

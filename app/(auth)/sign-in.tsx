@@ -1,4 +1,5 @@
 import { AuthContext } from "@/context/AuthContext";
+import { login } from "@/services/auth.service";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router } from "expo-router";
 import React, { useContext, useState } from "react";
@@ -30,19 +31,7 @@ const SignIn = () => {
     try {
       setLoading(true);
 
-      const response = await fetch("http://192.168.68.101:3000/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
-      const result = await response.json();
-
-      if (!response.ok) {
-        setError(result.message);
-        return;
-      }
+      const result = await login({ email, password });
       await AsyncStorage.setItem("token", result.refreshToken);
       setUserToken(result.accessToken);
       router.replace("/");

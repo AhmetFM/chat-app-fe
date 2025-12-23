@@ -1,31 +1,170 @@
 [
-    { "first_name": "Ahmet", "last_name": "Meric", "img": "https://picsum.photos/seed/A/200", "desc": "Et tu brutee Uzun yazı sadsadsadsadskdsadlsaflasflkafkkflsalfak k" },
-    { "first_name": "Ahmet", "last_name": "Meric", "img": "https://picsum.photos/seed/A/200", "desc": "Et tu brutee Uzun yazı sadsadsadsadskdsadlsaflasflkafkkflsalfak k" },
-    { "first_name": "Ahmet", "last_name": "Meric", "img": "https://picsum.photos/seed/A/200", "desc": "Et tu brutee Uzun yazı sadsadsadsadskdsadlsaflasflkafkkflsalfak k" },
-    { "first_name": "Ahmet", "last_name": "Meric", "img": "https://picsum.photos/seed/A/200", "desc": "Et tu brutee Uzun yazı sadsadsadsadskdsadlsaflasflkafkkflsalfak k" },
-    { "first_name": "Ahmet", "last_name": "Meric", "img": "https://picsum.photos/seed/A/200", "desc": "Et tu brutee Uzun yazı sadsadsadsadskdsadlsaflasflkafkkflsalfak k" },
-    { "first_name": "Bora", "last_name": "Kara", "img": "https://picsum.photos/seed/B/200", "desc": "Lorem ipsum dolor." },
-    { "first_name": "Cenk", "last_name": "Arslan", "img": "https://picsum.photos/seed/C/200", "desc": "Random description." },
-    { "first_name": "Deniz", "last_name": "Yilmaz", "img": "https://picsum.photos/seed/D/200", "desc": "Short dummy text." },
-    { "first_name": "Efe", "last_name": "Demir", "img": "https://picsum.photos/seed/E/200", "desc": "Sample bio entry." },
-    { "first_name": "Furkan", "last_name": "Sahin", "img": "https://picsum.photos/seed/F/200", "desc": "Just a sample." },
-    { "first_name": "Gökhan", "last_name": "Aydin", "img": "https://picsum.photos/seed/G/200", "desc": "Temporary user text." },
-    { "first_name": "Hasan", "last_name": "Celik", "img": "https://picsum.photos/seed/H/200", "desc": "Example description." },
-    { "first_name": "Ibrahim", "last_name": "Koral", "img": "https://picsum.photos/seed/I/200", "desc": "Placeholder bio." },
-    { "first_name": "Jale", "last_name": "Turk", "img": "https://picsum.photos/seed/J/200", "desc": "Mock description." },
-    { "first_name": "Kemal", "last_name": "Ozkan", "img": "https://picsum.photos/seed/K/200", "desc": "Test profile snippet." },
-    { "first_name": "Levent", "last_name": "Guler", "img": "https://picsum.photos/seed/L/200", "desc": "Another placeholder." },
-    { "first_name": "Mert", "last_name": "Ozturk", "img": "https://picsum.photos/seed/M/200", "desc": "Bio text sample." },
-    { "first_name": "Naz", "last_name": "Aksoy", "img": "https://picsum.photos/seed/N/200", "desc": "Simple description." },
-    { "first_name": "Okan", "last_name": "Beyaz", "img": "https://picsum.photos/seed/O/200", "desc": "Random placeholder." },
-    { "first_name": "Pelin", "last_name": "Deniz", "img": "https://picsum.photos/seed/P/200", "desc": "Short dummy line." },
-    { "first_name": "Qadir", "last_name": "Hassan", "img": "https://picsum.photos/seed/Q/200", "desc": "Testing data." },
-    { "first_name": "Rıza", "last_name": "Kurt", "img": "https://picsum.photos/seed/R/200", "desc": "Bio placeholder." },
-    { "first_name": "Sena", "last_name": "Esen", "img": "https://picsum.photos/seed/S/200", "desc": "Simple dummy text." },
-    { "first_name": "Tuna", "last_name": "Baran", "img": "https://picsum.photos/seed/T/200", "desc": "Mock bio line." },
-    { "first_name": "Umut", "last_name": "Genc", "img": "https://picsum.photos/seed/U/200", "desc": "Sample text." },
-    { "first_name": "Veli", "last_name": "Cetin", "img": "https://picsum.photos/seed/V/200", "desc": "Temporary content." },
-    { "first_name": "Yasin", "last_name": "Polat", "img": "https://picsum.photos/seed/Y/200", "desc": "Filler description." },
-    { "first_name": "Zeynep", "last_name": "Sarikaya", "img": "https://picsum.photos/seed/Z/200", "desc": "Final profile text." }
-  ]
-  
+  {
+    "first_name": "Ahmet",
+    "last_name": "Meric",
+    "img": "https://picsum.photos/seed/A/200",
+    "desc": "Et tu brutee Uzun yazı sadsadsadsadskdsadlsaflasflkafkkflsalfak k"
+  },
+  {
+    "first_name": "Bora",
+    "last_name": "Kara",
+    "img": "https://picsum.photos/seed/B/200",
+    "desc": "Lorem ipsum dolor."
+  },
+  {
+    "first_name": "Cenk",
+    "last_name": "Arslan",
+    "img": "https://picsum.photos/seed/C/200",
+    "desc": "Random description."
+  },
+  {
+    "first_name": "Deniz",
+    "last_name": "Yilmaz",
+    "img": "https://picsum.photos/seed/D/200",
+    "desc": "Short dummy text."
+  },
+  {
+    "first_name": "Efe",
+    "last_name": "Demir",
+    "img": "https://picsum.photos/seed/E/200",
+    "desc": "Sample bio entry."
+  },
+  {
+    "first_name": "Furkan",
+    "last_name": "Sahin",
+    "img": "https://picsum.photos/seed/F/200",
+    "desc": "Just a sample."
+  },
+  {
+    "first_name": "Ahmet",
+    "last_name": "Meric",
+    "img": "https://picsum.photos/seed/A/200",
+    "desc": "Et tu brutee Uzun yazı sadsadsadsadskdsadlsaflasflkafkkflsalfak k"
+  },
+  {
+    "first_name": "Gökhan",
+    "last_name": "Aydin",
+    "img": "https://picsum.photos/seed/G/200",
+    "desc": "Temporary user text."
+  },
+  {
+    "first_name": "Hasan",
+    "last_name": "Celik",
+    "img": "https://picsum.photos/seed/H/200",
+    "desc": "Example description."
+  },
+  {
+    "first_name": "Ahmet",
+    "last_name": "Meric",
+    "img": "https://picsum.photos/seed/A/200",
+    "desc": "Et tu brutee Uzun yazı sadsadsadsadskdsadlsaflasflkafkkflsalfak k"
+  },
+  {
+    "first_name": "Ahmet",
+    "last_name": "Meric",
+    "img": "https://picsum.photos/seed/A/200",
+    "desc": "Et tu brutee Uzun yazı sadsadsadsadskdsadlsaflasflkafkkflsalfak k"
+  },
+  {
+    "first_name": "Ibrahim",
+    "last_name": "Koral",
+    "img": "https://picsum.photos/seed/I/200",
+    "desc": "Placeholder bio."
+  },
+  {
+    "first_name": "Jale",
+    "last_name": "Turk",
+    "img": "https://picsum.photos/seed/J/200",
+    "desc": "Mock description."
+  },
+  {
+    "first_name": "Kemal",
+    "last_name": "Ozkan",
+    "img": "https://picsum.photos/seed/K/200",
+    "desc": "Test profile snippet."
+  },
+  {
+    "first_name": "Levent",
+    "last_name": "Guler",
+    "img": "https://picsum.photos/seed/L/200",
+    "desc": "Another placeholder."
+  },
+  {
+    "first_name": "Mert",
+    "last_name": "Ozturk",
+    "img": "https://picsum.photos/seed/M/200",
+    "desc": "Bio text sample."
+  },
+  {
+    "first_name": "Naz",
+    "last_name": "Aksoy",
+    "img": "https://picsum.photos/seed/N/200",
+    "desc": "Simple description."
+  },
+  {
+    "first_name": "Okan",
+    "last_name": "Beyaz",
+    "img": "https://picsum.photos/seed/O/200",
+    "desc": "Random placeholder."
+  },
+  {
+    "first_name": "Pelin",
+    "last_name": "Deniz",
+    "img": "https://picsum.photos/seed/P/200",
+    "desc": "Short dummy line."
+  },
+  {
+    "first_name": "Qadir",
+    "last_name": "Hassan",
+    "img": "https://picsum.photos/seed/Q/200",
+    "desc": "Testing data."
+  },
+  {
+    "first_name": "Rıza",
+    "last_name": "Kurt",
+    "img": "https://picsum.photos/seed/R/200",
+    "desc": "Bio placeholder."
+  },
+  {
+    "first_name": "Sena",
+    "last_name": "Esen",
+    "img": "https://picsum.photos/seed/S/200",
+    "desc": "Simple dummy text."
+  },
+  {
+    "first_name": "Ahmet",
+    "last_name": "Meric",
+    "img": "https://picsum.photos/seed/A/200",
+    "desc": "Et tu brutee Uzun yazı sadsadsadsadskdsadlsaflasflkafkkflsalfak k"
+  },
+  {
+    "first_name": "Tuna",
+    "last_name": "Baran",
+    "img": "https://picsum.photos/seed/T/200",
+    "desc": "Mock bio line."
+  },
+  {
+    "first_name": "Umut",
+    "last_name": "Genc",
+    "img": "https://picsum.photos/seed/U/200",
+    "desc": "Sample text."
+  },
+  {
+    "first_name": "Veli",
+    "last_name": "Cetin",
+    "img": "https://picsum.photos/seed/V/200",
+    "desc": "Temporary content."
+  },
+  {
+    "first_name": "Yasin",
+    "last_name": "Polat",
+    "img": "https://picsum.photos/seed/Y/200",
+    "desc": "Filler description."
+  },
+  {
+    "first_name": "Zeynep",
+    "last_name": "Sarikaya",
+    "img": "https://picsum.photos/seed/Z/200",
+    "desc": "Final profile text."
+  }
+]

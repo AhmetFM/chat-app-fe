@@ -16,6 +16,19 @@ const SettingsLayout = () => {
           },
         }}
       />
+      <Stack.Screen
+        name="update-profile"
+        options={{
+          title: "Profile",
+          headerBackButtonDisplayMode: "minimal",
+          headerTransparent: true,
+          headerBlurEffect: "regular",
+          headerStyle: {
+            backgroundColor: "#f5f5f5",
+          },
+          headerTintColor: "black",
+        }}
+      />
     </Stack>
   );
 };

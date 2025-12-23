@@ -1,38 +1,20 @@
-import { format } from "date-fns";
 import React from "react";
 import { Image, Text, TouchableHighlight, View } from "react-native";
 
+import { Chat } from "@/types";
 import { FontAwesome } from "@expo/vector-icons";
 import { Link } from "expo-router";
 
-export interface SingleChatRowProps {
-  id: string;
-  from: string;
-  date: string;
-  img: string;
-  msg: string;
-  read: boolean;
-  unreadCount: number;
-}
-
-const SingleChatRow = ({
-  id,
-  from,
-  date,
-  img,
-  msg,
-  read,
-  unreadCount,
-}: SingleChatRowProps) => {
+const SingleChatRow = ({ id, userB, lastMessage }: Chat) => {
   return (
     <Link href={`/(details)/${id}`} asChild>
       <TouchableHighlight activeOpacity={0.6} underlayColor="#f0f0f0">
         <View className="w-full h-20 flex-row items-center gap-[14px] pl-5 py-[10px]">
           {/* Profile Img */}
-          {img ? (
+          {userB.profileImage ? (
             <Image
               className="w-[50px] h-[50px] rounded-full"
-              source={{ uri: img }}
+              source={{ uri: userB.profileImage }}
             />
           ) : (
             <View className="w-[50px] h-[50px] rounded-full items-center justify-center bg-gray-500">
@@ -42,12 +24,16 @@ const SingleChatRow = ({
 
           <View className="flex-1">
             {/* Title, lastMessage and date. */}
-            <Text className="text-lg font-bold">{from}</Text>
+            <Text className="text-lg font-bold">{userB.name}</Text>
             <Text className="text-base text-gray-500">
-              {msg.length > 40 ? `${msg.substring(0, 40)}...` : msg}
+              {lastMessage
+                ? lastMessage.length > 40
+                  ? `${lastMessage.substring(0, 40)}...`
+                  : lastMessage
+                : userB.aboutMe}
             </Text>
           </View>
-          <View className="gap-2">
+          {/* <View className="gap-2">
             <Text
               className={`text-gray-500 pr-5 items-start ${unreadCount && "text-green-600"} `}
             >
@@ -58,7 +44,7 @@ const SingleChatRow = ({
                 {unreadCount}
               </Text>
             )}
-          </View>
+          </View> */}
         </View>
       </TouchableHighlight>
     </Link>

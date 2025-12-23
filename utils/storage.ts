@@ -13,7 +13,7 @@ export const getToken = async () => {
 };
 
 export const refreshTokens = async (refreshToken: string) => {
-  const result = await fetch("http://192.168.68.101:3000/auth/refresh", {
+  const result = await fetch("http://192.168.1.11:3000/auth/refresh", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -24,7 +24,7 @@ export const refreshTokens = async (refreshToken: string) => {
 };
 
 export const getUserData = async (token: string) => {
-  return await fetch("http://192.168.68.101:3000/users/me", {
+  return await fetch("http://192.168.1.11:3000/users/me", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

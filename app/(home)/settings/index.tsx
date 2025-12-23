@@ -103,64 +103,68 @@ const SettingsPage = () => {
           }}
         >
           <View style={styles.block}>
-            <View style={{ flexDirection: "row" }}>
-              <Image
-                source={{
-                  uri: "https://avatars.githubusercontent.com/u/74562743?v=4",
-                }}
-                width={52}
-                height={52}
-                style={{
-                  borderRadius: 50,
-                  margin: 10,
-                }}
-              />
-              <View style={{ marginVertical: 14 }}>
-                <Text
-                  style={{
-                    fontSize: 18,
-                    fontWeight: "semibold",
-                    marginBottom: 2,
+            <TouchableOpacity
+              onPress={() => router.push("/(home)/settings/update-profile")}
+            >
+              <View style={{ flexDirection: "row" }}>
+                <Image
+                  source={{
+                    uri: "https://avatars.githubusercontent.com/u/74562743?v=4",
                   }}
-                >
-                  Ahmet
-                </Text>
-                <View
+                  width={52}
+                  height={52}
                   style={{
-                    borderWidth: 1,
-                    padding: 6,
-                    borderRadius: 14,
-                    position: "relative",
-                    backgroundColor: "#fff",
-                    flexDirection: "column",
-                    borderColor: "#e5e5e5",
-                  }}
-                >
-                  <View style={styles.outerBubble} />
-                  <View style={styles.bubble} />
-                  <View style={styles.invisibleBubble} />
-                  <Text>Et tu brute</Text>
-                </View>
-              </View>
-              <View
-                style={{
-                  flex: 1,
-                  alignItems: "flex-end",
-                  justifyContent: "center",
-                  marginRight: 16,
-                }}
-              >
-                <Ionicons
-                  name="qr-code-outline"
-                  size={24}
-                  style={{
-                    backgroundColor: "#e5e5e5",
-                    padding: 8,
                     borderRadius: 50,
+                    margin: 10,
                   }}
                 />
+                <View style={{ marginVertical: 14 }}>
+                  <Text
+                    style={{
+                      fontSize: 18,
+                      fontWeight: "semibold",
+                      marginBottom: 2,
+                    }}
+                  >
+                    Ahmet
+                  </Text>
+                  <View
+                    style={{
+                      borderWidth: 1,
+                      padding: 6,
+                      borderRadius: 14,
+                      position: "relative",
+                      backgroundColor: "#fff",
+                      flexDirection: "column",
+                      borderColor: "#e5e5e5",
+                    }}
+                  >
+                    <View style={styles.outerBubble} />
+                    <View style={styles.bubble} />
+                    <View style={styles.invisibleBubble} />
+                    <Text>Et tu brute</Text>
+                  </View>
+                </View>
+                <View
+                  style={{
+                    flex: 1,
+                    alignItems: "flex-end",
+                    justifyContent: "center",
+                    marginRight: 16,
+                  }}
+                >
+                  <Ionicons
+                    name="qr-code-outline"
+                    size={24}
+                    style={{
+                      backgroundColor: "#e5e5e5",
+                      padding: 8,
+                      borderRadius: 50,
+                    }}
+                  />
+                </View>
               </View>
-            </View>
+            </TouchableOpacity>
             <View style={styles.separator} />
             <View style={styles.item}>
               <MaterialIcons

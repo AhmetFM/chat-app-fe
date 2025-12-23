@@ -11,8 +11,8 @@ const FriendsLayout = () => {
           headerLargeTitle: true,
           headerTransparent: true,
           headerBlurEffect: "regular",
-          headerSearchBarOptions: {
-            placeholder: "Search",
+          headerStyle: {
+            backgroundColor: "#f5f5f5",
           },
         }}
       />

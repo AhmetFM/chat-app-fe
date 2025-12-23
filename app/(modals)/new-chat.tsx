@@ -1,16 +1,29 @@
-import contacts from "@/assets/data/contacts.json";
+import { useFriends } from "@/hooks/useFriends";
+import { createOrGetConversation } from "@/services/conversation.service";
+import { FontAwesome } from "@expo/vector-icons";
 import React from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { AlphabetList } from "react-native-section-alphabet-list";
+
+const separatorHeight = StyleSheet.hairlineWidth;
+
 const NewChat = () => {
-  const data = contacts.map((contact, index) => ({
-    value: `${contact.first_name} ${contact.last_name}`,
-    name: `${contact.first_name} ${contact.last_name}`,
-    img: contact.img,
-    desc: contact.desc,
-    key: `${contact.first_name} ${contact.last_name}-${index}`,
+  const { friends, loading } = useFriends();
+
+  const data = friends.map((contact, index) => ({
+    value: `${contact.name}`,
+    name: `${contact.name}`,
+    img: contact.profileImage,
+    desc: contact.aboutMe,
+    key: `${contact.id}`,
   }));
-  const separatorHeight = StyleSheet.hairlineWidth;
+
+  const handleCreateChat = async (id: string) => {
+    const result = await createOrGetConversation(id);
+    console.log(result.id);
+  };
+
+  if (loading) return null;
   return (
     <View className="flex-1 pt-32 bg-[#f5f5f5]">
       <AlphabetList
@@ -28,7 +41,7 @@ const NewChat = () => {
           marginLeft: 16,
         }}
         renderCustomSectionHeader={(section) => (
-          <View className="h-[30px] justify-center px-3 bg-[#f5f5f5]">
+          <View className="h-[30px] justify-center px-3 #f5f5f5]">
             <Text>{section.title}</Text>
           </View>
         )}
@@ -42,20 +55,29 @@ const NewChat = () => {
           />
         )}
         renderCustomItem={(item: any) => (
-          <View className="flex-1 px-3 flex-row items-center gap-3 bg-white  h-[50px]">
-            <Image
-              source={{ uri: item.img }}
-              className="w-10 h-10 rounded-3xl"
-            />
-            <View>
-              <Text className="text-black text-sm">{item.value}</Text>
-              <Text className="text-gray-400 text-xs">
-                {item.desc.length > 40
-                  ? `${item.desc.substring(0, 40)}...`
-                  : `${item.desc}`}
-              </Text>
+          <TouchableOpacity onPress={() => handleCreateChat(item.key)}>
+            <View className="flex-1 px-3 flex-row items-center gap-3 bg-white  h-[50px]">
+              {item.img ? (
+                <Image
+                  source={{ uri: item.img }}
+                  className="w-10 h-10 rounded-3xl"
+                />
+              ) : (
+                <View className="w-10 h-10 rounded-full items-center justify-center bg-gray-500">
+                  <FontAwesome name="user" size={18} color="white" />
+                </View>
+              )}
+
+              <View>
+                <Text className="text-black text-sm">{item.name}</Text>
+                <Text className="text-gray-400 text-xs">
+                  {item.desc.length > 40
+                    ? `${item.desc.substring(0, 40)}...`
+                    : `${item.desc}`}
+                </Text>
+              </View>
             </View>
-          </View>
+          </TouchableOpacity>
         )}
       />
     </View>

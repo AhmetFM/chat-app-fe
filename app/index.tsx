@@ -1,10 +1,5 @@
 import { AuthContext } from "@/context/AuthContext";
-import {
-  getToken,
-  getUserData,
-  refreshTokens,
-  saveToken,
-} from "@/utils/storage";
+import { getToken, refreshTokens, saveToken } from "@/utils/storage";
 import { Redirect } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useContext, useEffect, useState } from "react";
@@ -18,9 +13,9 @@ export default function Index() {
   useEffect(() => {
     const checkToken = async () => {
       const token = await getToken();
-      const isValidToken = await getUserData(token!);
+      //const isValidToken = await getUserData(token!);
 
-      if (!token || isValidToken.statusCode === 401) {
+      if (!token) {
         setIsReady(true);
         return;
       }

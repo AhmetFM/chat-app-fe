@@ -40,6 +40,28 @@ export default function RootLayout() {
             ),
           }}
         />
+        <Stack.Screen
+          name="(modals)/change-name"
+          options={{
+            presentation: "modal",
+            title: "Name",
+            headerTransparent: true,
+            headerStyle: {
+              backgroundColor: "#f5f5f5",
+            },
+            headerBlurEffect: "regular",
+          }}
+        />
+        <Stack.Screen
+          name="(settings)/update-picture"
+          options={{
+            title: "Profile Picture",
+            headerBackButtonDisplayMode: "minimal",
+            headerTintColor: "black",
+            headerBlurEffect: "regular",
+            headerTransparent: true,
+          }}
+        />
       </Stack>
     </AuthProvider>
   );

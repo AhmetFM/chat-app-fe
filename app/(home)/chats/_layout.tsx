@@ -38,6 +38,9 @@ const ChatsLayout = () => {
           headerSearchBarOptions: {
             placeholder: "Search",
           },
+          headerStyle: {
+            backgroundColor: "#f5f5f5",
+          },
         }}
       />
     </Stack>
