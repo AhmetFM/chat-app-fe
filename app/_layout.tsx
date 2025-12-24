@@ -1,11 +1,13 @@
 import { AuthProvider } from "@/context/AuthContext";
 import { Ionicons } from "@expo/vector-icons";
 import { Stack, useRouter } from "expo-router";
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity, useColorScheme } from "react-native";
 import "../global.css";
 
 export default function RootLayout() {
   const router = useRouter();
+  const colorScheme = useColorScheme();
+
   return (
     <AuthProvider>
       <Stack>
@@ -30,12 +32,22 @@ export default function RootLayout() {
               placeholder: "Search name or number",
               hideWhenScrolling: false,
             },
+            headerStyle: {
+              backgroundColor: colorScheme === "dark" ? "#18181b" : "#f5f5f5",
+            },
+            headerTitleStyle: {
+              color: colorScheme === "dark" ? "#fff" : "#000",
+            },
             headerRight: () => (
               <TouchableOpacity
                 onPress={() => router.back()}
-                className="rounded-[20px] bg-gray-200 p-1"
+                className="rounded-[20px] bg-gray-200 dark:bg-zinc-800 p-1"
               >
-                <Ionicons name="close" size={30} />
+                <Ionicons
+                  name="close"
+                  size={30}
+                  color={colorScheme === "dark" ? "white" : "black"}
+                />
               </TouchableOpacity>
             ),
           }}

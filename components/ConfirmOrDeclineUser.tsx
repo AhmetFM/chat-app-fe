@@ -22,7 +22,9 @@ const ConfirmOrDeclineUser = ({ id, sender }: FriendRequest) => {
         </View>
       )}
       <View className="flex-1">
-        <Text className="text-lg font-medium">{sender.name}</Text>
+        <Text className="text-lg font-medium dark:text-white">
+          {sender.name}
+        </Text>
         <Text className="text-gray-500">
           {sender.aboutMe.length >= 40
             ? sender.aboutMe.slice(0, 24) + "..."

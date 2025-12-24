@@ -18,7 +18,7 @@ const Chat = () => {
   //const [messages, setMessages] = useState<any>([]);
   const [text, setText] = useState("");
 
-  const { messages, sendMessage, userId } = useChat(conversationId as string);
+  const { messages, sendMessage, user } = useChat(conversationId as string);
 
   // If you have a tab bar, include its height
   const tabbarHeight = 50;
@@ -68,7 +68,7 @@ const Chat = () => {
       <GiftedChat
         messages={messages}
         onSend={sendMessage}
-        user={{ _id: userId as string }}
+        user={{ _id: user.id }}
         renderSystemMessage={(props) => (
           <SystemMessage
             containerStyle={{

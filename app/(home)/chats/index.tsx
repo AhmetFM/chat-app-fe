@@ -36,10 +36,11 @@ const Chats = () => {
               <TouchableOpacity
                 key={index}
                 onPress={() => setSelectedFilter(index)}
-                className={`px-4 py-2  border ${selectedFilter === index && "border-green-500 bg-green-200"} border-gray-300 rounded-3xl`}
+                className={`px-4 py-2  border ${selectedFilter === index && "border-green-500 bg-green-200 dark:border-green-800 dark:bg-green-700"} border-gray-300 dark:border-gray-800 rounded-3xl`}
               >
-                <Text className="text-gray-600 text-base font-medium">
+                <Text className="text-gray-600 dark:text-gray-100 text-base font-medium">
                   {filter}
+                  {/*  */}
                 </Text>
               </TouchableOpacity>
             ))}

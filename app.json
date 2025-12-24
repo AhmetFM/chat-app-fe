@@ -10,6 +10,9 @@
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
+      "infoPlist": {
+        "UIDesignRequiresCompatibility": false
+      },
       "bundleIdentifier": "com.anonymous.frontend"
     },
     "android": {

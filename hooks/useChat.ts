@@ -6,7 +6,7 @@ import { GiftedChat, IMessage } from "react-native-gifted-chat";
 
 const useChat = (conversationId: string) => {
   const [messages, setMessages] = useState<IMessage[]>([]);
-  const { userToken, userId } = useContext(AuthContext);
+  const { userToken, user } = useContext(AuthContext);
 
   // Initial fetch
   useEffect(() => {
@@ -81,7 +81,7 @@ const useChat = (conversationId: string) => {
     });
   }, []);
 
-  return { messages, sendMessage, userId };
+  return { messages, sendMessage, user };
 };
 
 export default useChat;

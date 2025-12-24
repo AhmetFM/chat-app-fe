@@ -2,12 +2,20 @@ import { useFriends } from "@/hooks/useFriends";
 import { createOrGetConversation } from "@/services/conversation.service";
 import { FontAwesome } from "@expo/vector-icons";
 import React from "react";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  useColorScheme,
+  View,
+} from "react-native";
 import { AlphabetList } from "react-native-section-alphabet-list";
 
 const separatorHeight = StyleSheet.hairlineWidth;
 
 const NewChat = () => {
+  const colorScheme = useColorScheme();
   const { friends, loading } = useFriends();
 
   const data = friends.map((contact, index) => ({
@@ -25,7 +33,7 @@ const NewChat = () => {
 
   if (loading) return null;
   return (
-    <View className="flex-1 pt-32 bg-[#f5f5f5]">
+    <View className="flex-1 pt-32 bg-[#f5f5f5] dark:bg-zinc-900 ">
       <AlphabetList
         data={data}
         stickySectionHeadersEnabled
@@ -35,14 +43,16 @@ const NewChat = () => {
         }}
         indexContainerStyle={{
           width: 24,
-          backgroundColor: "#f5f5f5",
+          backgroundColor: colorScheme === "dark" ? "#18181b" : "#f5f5f5",
         }}
         style={{
           marginLeft: 16,
         }}
         renderCustomSectionHeader={(section) => (
-          <View className="h-[30px] justify-center px-3 #f5f5f5]">
-            <Text>{section.title}</Text>
+          <View className="h-[30px] justify-center px-3 bg-[#f5f5f5] dark:bg-zinc-900">
+            <Text className="dark:text-green-600 font-bold">
+              {section.title}
+            </Text>
           </View>
         )}
         ItemSeparatorComponent={() => (
@@ -51,12 +61,12 @@ const NewChat = () => {
               height: separatorHeight,
               marginLeft: 60,
             }}
-            className="bg-gray-200"
+            className="bg-gray-200 dark:bg-zinc-800"
           />
         )}
         renderCustomItem={(item: any) => (
           <TouchableOpacity onPress={() => handleCreateChat(item.key)}>
-            <View className="flex-1 px-3 flex-row items-center gap-3 bg-white  h-[50px]">
+            <View className="flex-1 px-3 flex-row items-center rounded-md gap-3 bg-white dark:bg-zinc-800 h-[50px]">
               {item.img ? (
                 <Image
                   source={{ uri: item.img }}
@@ -69,7 +79,9 @@ const NewChat = () => {
               )}
 
               <View>
-                <Text className="text-black text-sm">{item.name}</Text>
+                <Text className="text-black text-sm dark:text-white">
+                  {item.name}
+                </Text>
                 <Text className="text-gray-400 text-xs">
                   {item.desc.length > 40
                     ? `${item.desc.substring(0, 40)}...`

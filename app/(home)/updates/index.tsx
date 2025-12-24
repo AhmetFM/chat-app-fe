@@ -2,20 +2,28 @@ import AddMyStatus from "@/components/AddMyStatus";
 import SingleUpdate from "@/components/SingleUpdate";
 import { Entypo } from "@expo/vector-icons";
 import React from "react";
-import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+import {
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  useColorScheme,
+  View,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const Updates = () => {
+  const colorScheme = useColorScheme();
+
   return (
     <SafeAreaView
       style={{
         flex: 1,
-        backgroundColor: "#f5f5f5",
+        backgroundColor: colorScheme === "dark" ? "#000" : "#f5f5f5",
       }}
     >
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <View className="mx-5 my-3 gap-8">
-          <Text className="text-xl font-medium">Status</Text>
+          <Text className="text-xl font-medium dark:text-white">Status</Text>
           <AddMyStatus />
         </View>
         <View className="mx-5 my-4 gap-5">
@@ -24,13 +32,13 @@ const Updates = () => {
           <SingleUpdate opened={true} id={"2"} />
         </View>
         <View className="mx-5 my-4 gap-4">
-          <Text className="text-xl font-medium">Channels</Text>
+          <Text className="text-xl font-medium dark:text-white">Channels</Text>
           <Text className="text-gray-500">
             Stay updated on topics that matter to you. Find Channels to follow
             below.
           </Text>
           <View className="flex-row items-center justify-between">
-            <Text className="text-lg text-gray-700 font-medium">
+            <Text className="text-lg text-gray-700 font-medium dark:text-white">
               Find channels to follow
             </Text>
             <Entypo name="chevron-down" size={16} color="grey" />

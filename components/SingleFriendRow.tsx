@@ -17,7 +17,7 @@ const SingleFriendRow = ({ profileImage, name, aboutMe }: User) => {
         </View>
       )}
       <View className="flex-1">
-        <Text className="text-lg font-medium">{name}</Text>
+        <Text className="text-lg font-medium dark:text-white">{name}</Text>
         <Text className="text-gray-500">
           {aboutMe.length >= 40 ? aboutMe.slice(0, 24) + "..." : aboutMe}
         </Text>

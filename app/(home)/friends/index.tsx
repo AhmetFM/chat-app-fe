@@ -4,14 +4,22 @@ import SingleUserRow from "@/components/SingleUserRow";
 import { useFriends } from "@/hooks/useFriends";
 import { Stack } from "expo-router";
 import React, { useState } from "react";
-import { FlatList, ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  FlatList,
+  ScrollView,
+  StyleSheet,
+  Text,
+  useColorScheme,
+  View,
+} from "react-native";
 
 const separatorHeight = StyleSheet.hairlineWidth;
 
 const Friends = () => {
   const [query, setQuery] = useState<string>("");
-
   const { users, requests, friends, loading, refresh } = useFriends(query);
+
+  const colorScheme = useColorScheme();
 
   if (loading) {
     return null;
@@ -21,7 +29,7 @@ const Friends = () => {
     <View
       style={{
         flex: 1,
-        backgroundColor: "#f5f5f5",
+        backgroundColor: colorScheme === "dark" ? "#000" : "#f5f5f5",
       }}
     >
       <Stack.Screen
@@ -41,7 +49,9 @@ const Friends = () => {
         }}
       >
         <View className="mx-5 mt-3 gap-8">
-          <Text className="text-xl font-medium">Friend requests</Text>
+          <Text className="text-xl font-medium dark:text-white">
+            Friend requests
+          </Text>
         </View>
         <View className="mx-5 my-4 gap-5">
           <FlatList
@@ -61,7 +71,7 @@ const Friends = () => {
           />
         </View>
         <View className="mx-5 mt-3 gap-8">
-          <Text className="text-xl font-medium">Friends</Text>
+          <Text className="text-xl font-medium dark:text-white">Friends</Text>
         </View>
         <View className="mx-5 my-4 gap-5">
           <FlatList
@@ -82,7 +92,9 @@ const Friends = () => {
         </View>
         {/* ADD NEW FRIENDS */}
         <View className="mx-5 mt-3 gap-8">
-          <Text className="text-xl font-medium">Add New Friends</Text>
+          <Text className="text-xl font-medium dark:text-white">
+            Add New Friends
+          </Text>
         </View>
         <View className="mx-5 my-4 gap-5">
           <FlatList

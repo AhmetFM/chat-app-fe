@@ -1,7 +1,9 @@
 import { Stack } from "expo-router";
 import React from "react";
+import { useColorScheme } from "react-native";
 
 const FriendsLayout = () => {
+  const colorScheme = useColorScheme();
   return (
     <Stack>
       <Stack.Screen
@@ -12,7 +14,10 @@ const FriendsLayout = () => {
           headerTransparent: true,
           headerBlurEffect: "regular",
           headerStyle: {
-            backgroundColor: "#f5f5f5",
+            backgroundColor: colorScheme === "dark" ? "#000" : "#f5f5f5",
+          },
+          headerTitleStyle: {
+            color: colorScheme === "dark" ? "#fff" : "#000",
           },
         }}
       />

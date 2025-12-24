@@ -1,7 +1,8 @@
 import { getToken } from "./storage";
 
 //101
-const API_URL = "http://192.168.1.11:3000";
+
+const API_URL = "http://192.168.68.109:3000";
 
 export const fetchApi = async (endpoint: string, options: RequestInit = {}) => {
   const token = await getToken();

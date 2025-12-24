@@ -1,14 +1,21 @@
 import { FontAwesome6, Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
 import React from "react";
+import { useColorScheme } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 const HomeLayout = () => {
+  const colorScheme = useColorScheme();
+
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <Tabs
         screenOptions={{
           tabBarActiveTintColor: "#1DAB61",
+          tabBarStyle: {
+            backgroundColor: colorScheme === "dark" ? "#000" : "#f5f5f5",
+            borderColor: colorScheme === "dark" ? "#27272a" : "#f5f5f5",
+          },
         }}
       >
         <Tabs.Screen
@@ -20,7 +27,8 @@ const HomeLayout = () => {
               <MaterialIcons name="update" color={color} size={size} />
             ),
             tabBarStyle: {
-              backgroundColor: "#f5f5f5",
+              backgroundColor: colorScheme === "dark" ? "#000" : "#f5f5f5",
+              borderColor: colorScheme === "dark" ? "#27272a" : "#f5f5f5",
             },
           }}
         />
@@ -33,7 +41,8 @@ const HomeLayout = () => {
               <FontAwesome6 name="contact-book" size={size} color={color} />
             ),
             tabBarStyle: {
-              backgroundColor: "#f5f5f5",
+              backgroundColor: colorScheme === "dark" ? "#000" : "#f5f5f5",
+              borderColor: colorScheme === "dark" ? "#27272a" : "#f5f5f5",
             },
           }}
         />
@@ -46,7 +55,8 @@ const HomeLayout = () => {
               <Ionicons name="chatbubbles" color={color} size={size} />
             ),
             tabBarStyle: {
-              backgroundColor: "#f5f5f5",
+              backgroundColor: colorScheme === "dark" ? "#000" : "#f5f5f5",
+              borderColor: colorScheme === "dark" ? "#27272a" : "#f5f5f5",
             },
           }}
         />
@@ -59,7 +69,8 @@ const HomeLayout = () => {
               <Ionicons name="settings" color={color} size={size} />
             ),
             tabBarStyle: {
-              backgroundColor: "#f5f5f5",
+              backgroundColor: colorScheme === "dark" ? "#000" : "#f5f5f5",
+              borderColor: colorScheme === "dark" ? "#27272a" : "#f5f5f5",
             },
           }}
         />

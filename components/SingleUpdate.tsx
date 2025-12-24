@@ -38,7 +38,7 @@ const SingleUpdate = ({ opened, id }: { opened: boolean; id: string }) => {
         </View>
         <View className="mt-2">
           {/* My Status, Add to my status */}
-          <Text className="text-xl font-medium">My Status</Text>
+          <Text className="text-xl font-medium dark:text-white">My Status</Text>
           <Text className="font-light text-gray-600">4h ago</Text>
         </View>
       </View>

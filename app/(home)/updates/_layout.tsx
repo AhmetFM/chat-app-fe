@@ -1,9 +1,10 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Stack } from "expo-router";
 import React from "react";
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity, useColorScheme } from "react-native";
 
 const UpdatesLayout = () => {
+  const colorScheme = useColorScheme();
   return (
     <Stack>
       <Stack.Screen
@@ -14,18 +15,21 @@ const UpdatesLayout = () => {
           headerTransparent: true,
           headerBlurEffect: "regular",
           headerLeft: ({}) => (
-            <TouchableOpacity className="bg-gray-200 p-1 rounded-full">
+            <TouchableOpacity className="bg-gray-200 dark:bg-zinc-800 p-1 rounded-full">
               <Ionicons
                 className="fill-white"
                 name="ellipsis-horizontal"
                 size={20}
-                color="black"
+                color={colorScheme === "dark" ? "white" : "black"}
               />
             </TouchableOpacity>
           ),
-          /* headerSearchBarOptions: {
-            placeholder: "Search",
-          }, */
+          headerStyle: {
+            backgroundColor: colorScheme === "dark" ? "#000" : "#f5f5f5",
+          },
+          headerTitleStyle: {
+            color: colorScheme === "dark" ? "#f5f5f5" : "#000",
+          },
         }}
       />
       <Stack.Screen
