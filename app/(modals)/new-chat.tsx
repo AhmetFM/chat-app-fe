@@ -1,6 +1,7 @@
 import { useFriends } from "@/hooks/useFriends";
 import { createOrGetConversation } from "@/services/conversation.service";
 import { FontAwesome } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import React from "react";
 import {
   Image,
@@ -16,6 +17,7 @@ const separatorHeight = StyleSheet.hairlineWidth;
 
 const NewChat = () => {
   const colorScheme = useColorScheme();
+  const router = useRouter();
   const { friends, loading } = useFriends();
 
   const data = friends.map((contact, index) => ({
@@ -28,7 +30,8 @@ const NewChat = () => {
 
   const handleCreateChat = async (id: string) => {
     const result = await createOrGetConversation(id);
-    console.log(result.id);
+    router.dismiss();
+    router.push(`/(details)/${result.id}`);
   };
 
   if (loading) return null;

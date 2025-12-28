@@ -1,5 +1,6 @@
+import { FontAwesome } from "@expo/vector-icons";
 import React from "react";
-import { Animated, Text, TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 
 const SingleUpdate = ({ opened, id }: { opened: boolean; id: string }) => {
   /* const scale = useRef(new Animated.Value(1)).current;
@@ -24,17 +25,18 @@ const SingleUpdate = ({ opened, id }: { opened: boolean; id: string }) => {
         <View
           className={`border-2 rounded-full p-[2px] ${opened ? "border-gray-400" : "border-green-700"} `}
         >
-          <Animated.Image
+          {/* <Animated.Image
             source={{
               uri: "https://avatars.githubusercontent.com/u/74562743?v=4",
             }}
             width={60}
             height={60}
             className="rounded-full"
-            /* style={{
-              transform: [{ scale }],
-            }} */
-          />
+             
+          /> */}
+          <View className="w-[60px] h-[60px] rounded-full items-center justify-center bg-gray-500">
+            <FontAwesome name="user" size={24} color="white" />
+          </View>
         </View>
         <View className="mt-2">
           {/* My Status, Add to my status */}

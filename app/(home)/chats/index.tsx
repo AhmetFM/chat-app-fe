@@ -1,12 +1,16 @@
 import SingleChatRow from "@/components/SingleChatRow";
+import { useChatContext } from "@/context/ChatsContext";
 import useChats from "@/hooks/useChats";
+import { FontAwesome } from "@expo/vector-icons";
 import React, { useState } from "react";
 import {
+  ActivityIndicator,
   FlatList,
   ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
+  useColorScheme,
   View,
 } from "react-native";
 
@@ -14,25 +18,26 @@ const separatorHeight = StyleSheet.hairlineWidth;
 
 const Chats = () => {
   const FILTERS = ["All", "Unread", "Favorites", "Groups", "+"];
-
+  const colorScheme = useColorScheme();
   const [selectedFilter, setSelectedFilter] = useState(0);
 
-  const { chats, loading } = useChats();
+  const { loading } = useChats();
 
-  if (loading) return null;
+  const { chats } = useChatContext();
+
+  if (loading)
+    return (
+      <View className="flex-1 h-full dark:bg-black">
+        <ActivityIndicator size="large" />
+      </View>
+    );
 
   return (
     <View className="flex-1 dark:bg-black">
-      {chats === 0 ? (
-        <View className="flex-1 bg-[#f5f5f5] dark:bg-black flex items-center justify-center">
-          <Text className="dark:text-white">
-            Start conversations with pressing plus button
-          </Text>
-        </View>
-      ) : (
-        <ScrollView contentInsetAdjustmentBehavior="always">
-          <View className="flex-row mx-4 gap-3">
-            {FILTERS.map((filter, index) => (
+      <ScrollView contentInsetAdjustmentBehavior="always">
+        <View className="flex-row mx-4 gap-3">
+          {chats?.length! > 0 &&
+            FILTERS.map((filter, index) => (
               <TouchableOpacity
                 key={index}
                 onPress={() => setSelectedFilter(index)}
@@ -44,24 +49,41 @@ const Chats = () => {
                 </Text>
               </TouchableOpacity>
             ))}
-          </View>
-          <FlatList
-            data={chats}
-            renderItem={({ item }) => <SingleChatRow {...item} />}
-            keyExtractor={(item) => item.id.toString()}
-            ItemSeparatorComponent={() => (
-              <View
-                style={{
-                  height: separatorHeight,
-                  marginLeft: 82,
-                }}
-                className="bg-gray-300"
-              />
-            )}
-            scrollEnabled={false}
-          />
-        </ScrollView>
-      )}
+        </View>
+        <FlatList
+          data={chats}
+          renderItem={({ item }) => <SingleChatRow {...item} />}
+          keyExtractor={(item) => item.id.toString()}
+          ItemSeparatorComponent={() => (
+            <View
+              style={{
+                height: separatorHeight,
+                marginLeft: 82,
+              }}
+              className="bg-gray-300"
+            />
+          )}
+          scrollEnabled={false}
+          ListEmptyComponent={() => (
+            <View className="flex-1 mt-32 bg-[#f5f5f5] dark:bg-black flex items-center justify-center gap-4">
+              <View>
+                <FontAwesome
+                  name="wechat"
+                  size={120}
+                  color={colorScheme === "dark" ? "white" : "black"}
+                />
+              </View>
+              <Text className="dark:text-white text-2xl font-medium text-center">
+                Start chatting
+              </Text>
+
+              <Text className="dark:text-white">
+                Add your friends to start chatting with them
+              </Text>
+            </View>
+          )}
+        />
+      </ScrollView>
     </View>
   );
 };

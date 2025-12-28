@@ -61,10 +61,17 @@ const UpdateProfile = () => {
         {/* About Me */}
         <View className="gap-3">
           <Text className="text-gray-600 ml-4">About Me</Text>
-          <View className="bg-white dark:bg-[#18181b] py-[14px] px-4 rounded-xl flex-row items-center justify-between">
-            <Text className="dark:text-white">{user.aboutMe}</Text>
+          <TouchableOpacity
+            onPress={() => router.push("/(modals)/change-about-me")}
+            className="bg-white dark:bg-[#18181b] py-[14px] px-4 rounded-xl flex-row items-center justify-between"
+          >
+            <Text className="dark:text-white">
+              {user.aboutMe.length > 40
+                ? user.aboutMe.slice(0, 40) + "..."
+                : user.aboutMe}
+            </Text>
             <Ionicons name="chevron-forward-outline" size={16} color={"gray"} />
-          </View>
+          </TouchableOpacity>
         </View>
         {/* Name */}
         <View className="gap-3">

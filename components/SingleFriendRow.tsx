@@ -3,12 +3,19 @@ import { FontAwesome } from "@expo/vector-icons";
 import React from "react";
 import { Image, Text, View } from "react-native";
 
-const SingleFriendRow = ({ profileImage, name, aboutMe }: User) => {
+const SingleFriendRow = (user: User) => {
+  if (!user)
+    return (
+      <View className="py-3">
+        <Text className="dark:text-white">Loading User</Text>
+      </View>
+    );
+
   return (
     <View className="flex-row items-center gap-3 py-3">
-      {profileImage ? (
+      {user.profileImage ? (
         <Image
-          source={{ uri: profileImage }}
+          source={{ uri: user.profileImage }}
           className="w-[36px] h-[36px] rounded-full"
         />
       ) : (
@@ -17,9 +24,11 @@ const SingleFriendRow = ({ profileImage, name, aboutMe }: User) => {
         </View>
       )}
       <View className="flex-1">
-        <Text className="text-lg font-medium dark:text-white">{name}</Text>
+        <Text className="text-lg font-medium dark:text-white">{user.name}</Text>
         <Text className="text-gray-500">
-          {aboutMe.length >= 40 ? aboutMe.slice(0, 24) + "..." : aboutMe}
+          {user.aboutMe?.length >= 40
+            ? user.aboutMe.slice(0, 24) + "..."
+            : user.aboutMe}
         </Text>
       </View>
     </View>

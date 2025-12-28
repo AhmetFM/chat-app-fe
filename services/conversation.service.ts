@@ -1,11 +1,11 @@
 import { fetchApi } from "@/utils/fetch-api";
 
-export const getMyConversations = async () => {
-  return await fetchApi("/conversations");
+export const getMyConversations = () => {
+  return fetchApi("/conversations");
 };
 
-export const createOrGetConversation = async (id: string) => {
-  return await fetchApi("/conversations", {
+export const createOrGetConversation = (id: string) => {
+  return fetchApi("/conversations", {
     method: "POST",
     body: JSON.stringify({
       userId: id,

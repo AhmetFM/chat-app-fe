@@ -8,7 +8,7 @@ SplashScreen.preventAutoHideAsync();
 
 export default function Index() {
   const [isReady, setIsReady] = useState(false);
-  const { userToken, setUserToken } = useContext(AuthContext);
+  const { userToken, setUserToken, setUser } = useContext(AuthContext);
 
   useEffect(() => {
     const checkToken = async () => {
@@ -21,10 +21,12 @@ export default function Index() {
       }
 
       try {
-        const newTokens = await refreshTokens(token!);
+        const newTokens = await refreshTokens(token);
 
         setUserToken(newTokens.accessToken);
         await saveToken(newTokens.refreshToken);
+        //const userData = await getUser();
+        //setUser(userData);
       } catch (e) {
         console.log(e);
       } finally {

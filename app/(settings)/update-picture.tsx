@@ -25,6 +25,8 @@ const UpdatePicture = () => {
 
   const colorScheme = useColorScheme();
 
+  //TODO: Add ImagePicker and FileSystem and select Profile Picture and save locally and supabase storage.
+
   useEffect(() => {
     bottomSheetRef.current?.expand();
     setIsReady(true);
@@ -65,7 +67,7 @@ const UpdatePicture = () => {
         }}
       />
 
-      {user.profileImage ? (
+      {user?.profileImage ? (
         <Image
           source={{
             uri: "https://ahmetmeric.vercel.app/images/profile-picture.jpg",

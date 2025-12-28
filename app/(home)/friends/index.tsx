@@ -2,9 +2,11 @@ import ConfirmOrDeclineUser from "@/components/ConfirmOrDeclineUser";
 import SingleFriendRow from "@/components/SingleFriendRow";
 import SingleUserRow from "@/components/SingleUserRow";
 import { useFriends } from "@/hooks/useFriends";
+import { useFriendsSocket } from "@/hooks/useFriendsSocket";
 import { Stack } from "expo-router";
 import React, { useState } from "react";
 import {
+  ActivityIndicator,
   FlatList,
   ScrollView,
   StyleSheet,
@@ -16,13 +18,36 @@ import {
 const separatorHeight = StyleSheet.hairlineWidth;
 
 const Friends = () => {
-  const [query, setQuery] = useState<string>("");
-  const { users, requests, friends, loading, refresh } = useFriends(query);
-
   const colorScheme = useColorScheme();
+  const [query, setQuery] = useState<string>("");
+
+  const {
+    users,
+    incomingRequests,
+    outgoingRequests,
+    friends,
+    loading,
+    setFriends,
+    setIncomingRequests,
+    setOutgoingRequests,
+  } = useFriends(query);
+
+  useFriendsSocket({ setFriends, setIncomingRequests, setOutgoingRequests });
+
+  const usersWithFriendsStatus = users.map((user) => ({
+    ...user,
+    isPending:
+      outgoingRequests.some((r) => r.receiverId === user.id) ||
+      incomingRequests.some((r) => r.senderId === user.id),
+    isFriends: friends.some((f) => f.id === user.id),
+  }));
 
   if (loading) {
-    return null;
+    return (
+      <View className="flex-1 h-full dark:bg-black">
+        <ActivityIndicator size="large" />
+      </View>
+    );
   }
 
   return (
@@ -55,14 +80,15 @@ const Friends = () => {
         </View>
         <View className="mx-5 my-4 gap-5">
           <FlatList
-            data={requests}
+            data={incomingRequests}
+            extraData={incomingRequests}
             renderItem={({ item }) => <ConfirmOrDeclineUser {...item} />}
             keyExtractor={(item) => item.id}
             ItemSeparatorComponent={() => (
               <View
                 style={{
                   height: separatorHeight,
-                  marginLeft: 82,
+                  marginLeft: 60,
                 }}
                 className="bg-gray-300"
               />
@@ -76,13 +102,14 @@ const Friends = () => {
         <View className="mx-5 my-4 gap-5">
           <FlatList
             data={friends}
+            extraData={friends}
             renderItem={({ item }) => <SingleFriendRow {...item} />}
             keyExtractor={(item) => item.id}
             ItemSeparatorComponent={() => (
               <View
                 style={{
                   height: separatorHeight,
-                  marginLeft: 82,
+                  marginLeft: 60,
                 }}
                 className="bg-gray-300"
               />
@@ -98,18 +125,14 @@ const Friends = () => {
         </View>
         <View className="mx-5 my-4 gap-5">
           <FlatList
-            data={users}
-            onRefresh={refresh}
-            refreshing={loading}
-            renderItem={({ item }) => (
-              <SingleUserRow onActionSuccess={refresh} {...item} />
-            )}
+            data={usersWithFriendsStatus}
+            renderItem={({ item }) => <SingleUserRow {...item} />}
             keyExtractor={(item) => item.id}
             ItemSeparatorComponent={() => (
               <View
                 style={{
                   height: separatorHeight,
-                  marginLeft: 82,
+                  marginLeft: 60,
                 }}
                 className="bg-gray-300"
               />

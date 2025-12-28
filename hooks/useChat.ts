@@ -1,17 +1,34 @@
 import { AuthContext } from "@/context/AuthContext";
+import { getMyConversations } from "@/services/conversation.service";
 import { getMessages } from "@/services/message.service";
+import { User } from "@/types";
 import { socket } from "@/utils/socket";
 import { useCallback, useContext, useEffect, useState } from "react";
 import { GiftedChat, IMessage } from "react-native-gifted-chat";
 
 const useChat = (conversationId: string) => {
   const [messages, setMessages] = useState<IMessage[]>([]);
+  const [otherUser, setOtherUser] = useState<User>();
   const { userToken, user } = useContext(AuthContext);
 
   // Initial fetch
   useEffect(() => {
+    if (!conversationId) return;
+
     const fetchMessages = async () => {
+      const conversations = await getMyConversations();
       const data = await getMessages(conversationId);
+
+      const currentConversation = conversations.filter(
+        (c: any) => c.id === conversationId
+      );
+
+      const otherUser =
+        currentConversation[0].userAId === user?.id
+          ? currentConversation[0].userB
+          : currentConversation[0].userA;
+
+      setOtherUser(otherUser);
 
       const formatted = data.map((message: any) => ({
         _id: message.id,
@@ -42,14 +59,14 @@ const useChat = (conversationId: string) => {
 
   //Socket lifecycle
   useEffect(() => {
-    socket.auth = { token: userToken };
+    if (!conversationId || !userToken) return;
 
+    socket.auth = { token: userToken };
     socket.connect();
 
     socket.emit("join_conversation", conversationId);
 
     socket.on("new_message", (message) => {
-      console.log("new message ", message);
       setMessages((prev) =>
         GiftedChat.append(prev, [
           {
@@ -62,12 +79,16 @@ const useChat = (conversationId: string) => {
       );
     });
 
+    socket.on("message:new", () => {
+      console.log("Screen Received");
+    });
+
     return () => {
       socket.emit("leave-conversation", conversationId);
       socket.off("new_message");
-      socket.disconnect();
+      //socket.disconnect();
     };
-  }, [conversationId]);
+  }, [conversationId, userToken]);
 
   const sendMessage = useCallback((messages: IMessage[]) => {
     const message = messages[0];
@@ -81,7 +102,7 @@ const useChat = (conversationId: string) => {
     });
   }, []);
 
-  return { messages, sendMessage, user };
+  return { messages, sendMessage, user, otherUser };
 };
 
 export default useChat;

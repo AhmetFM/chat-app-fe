@@ -24,7 +24,7 @@ export const refreshTokens = async (refreshToken: string) => {
 };
 
 export const getUserData = async (token: string) => {
-  return await fetch("http://192.168.68.109/users/me", {
+  return await fetch("http://192.168.68.109:3000/users/me", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

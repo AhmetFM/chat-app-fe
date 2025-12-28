@@ -9,6 +9,13 @@ const ConfirmOrDeclineUser = ({ id, sender }: FriendRequest) => {
     respondFriendRequest(id, respond);
   };
 
+  if (!sender)
+    return (
+      <View className="py-3">
+        <Text className="dark:text-white">Loading...</Text>
+      </View>
+    );
+
   return (
     <View className="flex-row items-center gap-3 py-3">
       {sender.profileImage ? (
@@ -26,7 +33,7 @@ const ConfirmOrDeclineUser = ({ id, sender }: FriendRequest) => {
           {sender.name}
         </Text>
         <Text className="text-gray-500">
-          {sender.aboutMe.length >= 40
+          {sender.aboutMe?.length >= 40
             ? sender.aboutMe.slice(0, 24) + "..."
             : sender.aboutMe}
         </Text>

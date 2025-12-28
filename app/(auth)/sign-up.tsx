@@ -3,7 +3,14 @@ import { register } from "@/services/auth.service";
 import { saveToken } from "@/utils/storage";
 import { router } from "expo-router";
 import React, { useContext, useState } from "react";
-import { Text, TextInput, TouchableOpacity, View } from "react-native";
+import {
+  KeyboardAvoidingView,
+  Platform,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const SignUp = () => {
@@ -72,7 +79,10 @@ const SignUp = () => {
 
   return (
     <SafeAreaView className="flex-1 items-center justify-center gap-6 px-6 dark:bg-black">
-      <View className="w-full max-w-md">
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        className="w-full h-full justify-center max-w-md"
+      >
         <Text className="text-3xl font-bold text-black dark:text-white text-center">
           Create account
         </Text>
@@ -146,7 +156,7 @@ const SignUp = () => {
             </Text>
           </TouchableOpacity>
         </View>
-      </View>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 };

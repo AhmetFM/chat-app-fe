@@ -4,6 +4,11 @@ import { Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const SignIn = () => {
+  /* const { userToken } = useContext(AuthContext);
+  if (userToken) {
+    router.replace("/(home)");
+  } */
+
   return (
     <SafeAreaView className="flex-1 items-center justify-between dark:bg-black">
       <View className="w-full items-center px-6 mt-20">

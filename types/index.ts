@@ -57,6 +57,7 @@ export type Chat = {
     name: string;
     email: string;
     profileImage: string;
+    aboutMe: string;
   };
   userAId: string;
   userB: {
@@ -67,4 +68,5 @@ export type Chat = {
     aboutMe: string;
   };
   userBId: string;
+  unreadCount?: number;
 };

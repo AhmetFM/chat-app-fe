@@ -1,3 +1,4 @@
+import { useChatListSocket } from "@/hooks/useChatListSocket";
 import { FontAwesome6, Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
 import React from "react";
@@ -6,6 +7,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 const HomeLayout = () => {
   const colorScheme = useColorScheme();
+  useChatListSocket();
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>

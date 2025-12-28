@@ -1,7 +1,8 @@
+import { AuthContext } from "@/context/AuthContext";
 import { sendFriendRequest } from "@/services/friends.service";
 import { User } from "@/types";
 import { FontAwesome, Ionicons } from "@expo/vector-icons";
-import React from "react";
+import React, { useContext } from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 
 const SingleUserRow = ({
@@ -11,12 +12,27 @@ const SingleUserRow = ({
   profileImage,
   aboutMe,
   receivedFriendRequests,
-  onActionSuccess,
-}: User & { onActionSuccess: () => void }) => {
+  sentFriendRequests,
+  isFriends,
+  isPending,
+}: User & { isPending: boolean; isFriends: boolean }) => {
+  const { user } = useContext(AuthContext);
+
   const handleAddFriend = async () => {
     await sendFriendRequest(id);
-    onActionSuccess();
   };
+
+  if (!id || isFriends) {
+    return null;
+  }
+
+  /*  const isPending =
+    sentFriendRequests?.some(
+      (res) => res.status === "PENDING" && res.receiverId === user?.id
+    ) ||
+    receivedFriendRequests?.some(
+      (req) => req.status === "PENDING" && req.senderId === user?.id
+    ); */
 
   return (
     <View className="flex-row items-center gap-3 py-3">
@@ -37,11 +53,7 @@ const SingleUserRow = ({
         </Text>
       </View>
       <TouchableOpacity
-        disabled={receivedFriendRequests?.some(
-          (req) =>
-            req.status === "PENDING" &&
-            (req.senderId === id || req.receiverId === id)
-        )}
+        disabled={isPending}
         onPress={handleAddFriend}
         className="disabled:opacity-50 p-2 rounded-full flex-row items-center justify-center gap-1 bg-[#1DAB61]"
       >

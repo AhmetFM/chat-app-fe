@@ -5,6 +5,7 @@ import { FontAwesome, Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import React, { useContext } from "react";
 import {
+  ActivityIndicator,
   FlatList,
   Image,
   ScrollView,
@@ -16,7 +17,7 @@ import {
 } from "react-native";
 
 const SettingsPage = () => {
-  const { userToken, user, setUserToken } = useContext(AuthContext);
+  const { user, setUser, setUserToken, loading } = useContext(AuthContext);
   const router = useRouter();
   const colorScheme = useColorScheme();
   const themedStyles = styles(colorScheme!);
@@ -87,9 +88,24 @@ const SettingsPage = () => {
 
   const logout = async () => {
     setUserToken(null);
+    setUser({
+      id: "",
+      email: "",
+      name: "",
+      profileImage: "",
+      aboutMe: "",
+    });
     await deleteToken();
     return router.navigate("/(auth)/welcome");
   };
+
+  if (loading) {
+    return (
+      <View className="flex-1 h-full dark:bg-black">
+        <ActivityIndicator size="large" />
+      </View>
+    );
+  }
 
   return (
     <>
@@ -110,7 +126,7 @@ const SettingsPage = () => {
               onPress={() => router.push("/(home)/settings/update-profile")}
             >
               <View style={{ flexDirection: "row" }}>
-                {user.profileImage ? (
+                {user?.profileImage ? (
                   <Image
                     source={{
                       uri: user.profileImage,
@@ -136,7 +152,7 @@ const SettingsPage = () => {
                       color: colorScheme === "dark" ? "#fff" : "#000",
                     }}
                   >
-                    {user.name}
+                    {user?.name}
                   </Text>
                   <View
                     style={{
@@ -154,7 +170,11 @@ const SettingsPage = () => {
                     <View style={themedStyles.outerBubble} />
                     <View style={themedStyles.bubble} />
                     <View style={themedStyles.invisibleBubble} />
-                    <Text className="dark:text-white">{user.aboutMe}</Text>
+                    <Text className="dark:text-white">
+                      {user?.aboutMe.length! > 30
+                        ? user?.aboutMe.slice(0, 30) + "..."
+                        : user?.aboutMe}
+                    </Text>
                   </View>
                 </View>
                 <View

@@ -9,7 +9,7 @@ export const getFriendRequests = () => {
   return fetchApi("/friends/requests");
 };
 
-export const getSendedFriendRequests = () => {
+export const getOutgoingFriendRequests = () => {
   return fetchApi("/friends/requests/me");
 };
 

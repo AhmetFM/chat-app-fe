@@ -27,12 +27,20 @@ const ChatsLayout = () => {
           ),
           headerRight: () => (
             <View className="flex-row gap-6">
-              <TouchableOpacity className="bg-gray-200 p-1 rounded-full">
-                <Ionicons name="camera" size={20} color="black" />
+              <TouchableOpacity className="bg-gray-200 dark:bg-zinc-800 p-1 rounded-full">
+                <Ionicons
+                  name="camera"
+                  size={20}
+                  color={colorScheme === "dark" ? "white" : "black"}
+                />
               </TouchableOpacity>
               <Link href="/(modals)/new-chat" asChild>
-                <TouchableOpacity className="bg-green-400 p-1 rounded-full">
-                  <Ionicons name="add" size={20} color="white" />
+                <TouchableOpacity className="bg-green-400 dark:bg-[#20c262] p-1 rounded-full">
+                  <Ionicons
+                    name="add"
+                    size={20}
+                    color={colorScheme === "dark" ? "black" : "white"}
+                  />
                 </TouchableOpacity>
               </Link>
             </View>

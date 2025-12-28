@@ -16,12 +16,12 @@ interface AuthResponse {
   refreshToken: string;
 }
 
-export const register = async ({
+export const register = ({
   email,
   name,
   password,
 }: RegisterPayload): Promise<AuthResponse> => {
-  return await fetchApi("/auth/register", {
+  return fetchApi("/auth/register", {
     method: "POST",
     body: JSON.stringify({
       name,
@@ -31,11 +31,11 @@ export const register = async ({
   });
 };
 
-export const login = async ({
+export const login = ({
   email,
   password,
 }: LoginPayload): Promise<AuthResponse> => {
-  return await fetchApi("/auth/login", {
+  return fetchApi("/auth/login", {
     method: "POST",
     body: JSON.stringify({
       password,
