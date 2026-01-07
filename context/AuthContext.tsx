@@ -1,6 +1,7 @@
 // src/context/AuthContext.tsx
 import { getUser } from "@/services/user.service";
 import { User } from "@/types";
+import { deleteToken } from "@/utils/storage";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { createContext, ReactNode, useEffect, useState } from "react";
 
@@ -46,7 +47,18 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         setUser(userData);
         setUserToken(token);
       } catch (e) {
-        console.error("Error loading token", e);
+        // If token is invalid/expired, clear it and reset auth state
+        const errorMessage = e instanceof Error ? e.message : String(e);
+        if (
+          errorMessage.includes("Unauthorized") ||
+          errorMessage.includes("401")
+        ) {
+          await deleteToken();
+          setUserToken(null);
+          setUser(null);
+        } else {
+          console.error("Error loading token", e);
+        }
       } finally {
         setLoading(false);
       }
@@ -57,8 +69,21 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     if (userToken) {
       const getUserData = async () => {
-        const userData = await getUser();
-        setUser(userData);
+        try {
+          const userData = await getUser();
+          setUser(userData);
+        } catch (e) {
+          // If token becomes invalid, clear it and reset auth state
+          const errorMessage = e instanceof Error ? e.message : String(e);
+          if (
+            errorMessage.includes("Unauthorized") ||
+            errorMessage.includes("401")
+          ) {
+            await deleteToken();
+            setUserToken(null);
+            setUser(null);
+          }
+        }
       };
       getUserData();
     }

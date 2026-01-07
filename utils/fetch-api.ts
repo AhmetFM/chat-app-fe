@@ -1,11 +1,11 @@
 import { getToken } from "./storage";
 
-const API_URL = "http://192.168.68.109:3000";
-
 export const fetchApi = async (endpoint: string, options: RequestInit = {}) => {
+  const apiUrl = process.env.EXPO_PUBLIC_API_URL;
+
   const token = await getToken();
 
-  const res = await fetch(`${API_URL}${endpoint}`, {
+  const res = await fetch(`${"http://192.168.68.110:3000"}${endpoint}`, {
     ...options,
     headers: {
       "Content-Type": "application/json",

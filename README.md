@@ -1,50 +1,142 @@
-# Welcome to your Expo app 👋
+# 📱 Chat App – Frontend
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A real-time mobile chat application built with **React Native** and **Expo**, featuring real-time messaging via **Socket.IO**, offline support, and a clean, modern UI.
 
-## Get started
+This repository contains the **frontend (mobile)** part of the project.
 
-1. Install dependencies
+---
 
-   ```bash
-   npm install
-   ```
+## ✨ Features
 
-2. Start the app
+- 🔐 Authentication (JWT-based)
+- 💬 Real-time 1-to-1 messaging (Socket.IO)
+- 📨 Message history with pagination
+- 📴 Offline message support (planned)
+- 🔔 Unread message count
+- 👥 Conversation & chat list
+- 🎨 Modern UI with system-based theming
+- 📱 iOS & Android support via Expo
 
-   ```bash
-   npx expo start
-   ```
+---
 
-In the output, you'll find options to open the app in a
+## 🛠 Tech Stack
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+- **React Native**
+- **Expo**
+- **TypeScript**
+- **Nativewind**
+- **Socket.IO Client**
+- **Context API** (Global State Management)
+- **Gifted Chat**
+- **Axios**
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+---
 
-## Get a fresh project
+## 📂 Project Structure
 
-When you're ready, run:
-
-```bash
-npm run reset-project
+```
+/
+├── components/ # Reusable UI components
+├── context/ # Global state (Auth, Chats, Socket, ChatScreen)
+├── hooks/ # Custom hooks (useChat, useChatSocket, etc.)
+├── services/ # API service layer
+├── types/ # TypeScript types & interfaces
+├── utils/ # Helpers (socket, constants)
+└── app/ # Layouts and routes using Expo Router
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+---
 
-## Learn more
+## 🔌 Real-Time Communication
 
-To learn more about developing your project with Expo, look at the following resources:
+- Uses **Socket.IO** for real-time messaging
+- Conversations are joined via rooms (`conversationId`)
+- Events:
+  - `join_conversation`
+  - `leave_conversation`
+  - `message:new`
+  - `send_message`
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+Unread message count and last message are updated in real-time via socket listeners.
 
-## Join the community
+---
 
-Join our community of developers creating universal apps.
+## 📴 Offline Support (In Progress)
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Planned behavior:
+
+- Messages are stored locally when offline
+- Pending messages are sent automatically once connection is restored
+- User is notified when messages are synced
+
+---
+
+## 🚧 Todo / Roadmap
+
+The project is still under active development.
+
+- [ ] 📸 Image messaging
+  - [ ] Local image storage (device)
+  - [ ] Server-side image upload
+- [ ] 📴 Offline usage
+  - [ ] Store messages locally
+  - [ ] Auto-sync when online
+- [ ] 👥 Friend management
+  - [ ] Remove friend
+- [ ] 📬 Message features
+  - [ ] Read receipts
+  - [ ] Typing indicators
+- [ ] 🔔 Push notifications
+- [ ] 🧪 Testing
+
+---
+
+## ▶️ Getting Started
+
+### 1️⃣ Install dependencies
+
+```bash
+npm install
+# or
+yarn install
+```
+
+### 2️⃣ Start the app
+
+```bash
+npx expo start
+```
+
+Run on:
+
+- İOS Simulator
+- Andriod Emulator
+- Physical device via Expo Go
+
+---
+
+## ⚙️ Environment Variables
+
+Create a `.env`file:
+
+```env
+# Write your ip address of your computer
+# If you write localhost there it wont work
+EXPO_PUBLIC_API_URL:http://192.168.1.1:3000
+```
+
+---
+
+## 🔗 Backend
+
+The backend is built separately using NestJS, PostgreSQL, and Socket.IO.
+
+👉 Backend repository: [Project Link](https://github.com/AhmetFM/chatter-be)
+
+---
+
+## 📌 Notes
+
+- This project is under active developtment.
+- Architecture focuses on scalability and clean separation of concerns.
+- Context API is used instead of external state libraries for simplicity.
