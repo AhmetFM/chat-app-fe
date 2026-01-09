@@ -1,8 +1,8 @@
 import { AuthContext } from "@/context/AuthContext";
+import { useSocket } from "@/context/SocketContext";
 import { getMyConversations } from "@/services/conversation.service";
 import { getMessages } from "@/services/message.service";
 import { User } from "@/types";
-import { socket } from "@/utils/socket";
 import { useCallback, useContext, useEffect, useState } from "react";
 import { GiftedChat, IMessage } from "react-native-gifted-chat";
 
@@ -10,6 +10,7 @@ const useChat = (conversationId: string) => {
   const [messages, setMessages] = useState<IMessage[]>([]);
   const [otherUser, setOtherUser] = useState<User>();
   const { userToken, user } = useContext(AuthContext);
+  const { socket, isConnected } = useSocket();
 
   // Initial fetch
   useEffect(() => {
@@ -57,16 +58,15 @@ const useChat = (conversationId: string) => {
     fetchMessages();
   }, [conversationId]);
 
-  //Socket lifecycle
+  //Socket lifecycle - wait for connection before setting up listeners
   useEffect(() => {
-    if (!conversationId || !userToken) return;
+    if (!conversationId || !userToken || !isConnected) return;
 
-    socket.auth = { token: userToken };
-    socket.connect();
-
+    // Join the conversation room
     socket.emit("join_conversation", conversationId);
 
-    socket.on("new_message", (message) => {
+    // Set up message listeners
+    const handleNewMessage = (message: any) => {
       setMessages((prev) =>
         GiftedChat.append(prev, [
           {
@@ -77,18 +77,21 @@ const useChat = (conversationId: string) => {
           },
         ])
       );
-    });
+    };
 
-    socket.on("message:new", () => {
+    const handleMessageNew = () => {
       console.log("Screen Received");
-    });
+    };
+
+    socket.on("new_message", handleNewMessage);
+    socket.on("message:new", handleMessageNew);
 
     return () => {
       socket.emit("leave-conversation", conversationId);
-      socket.off("new_message");
-      //socket.disconnect();
+      socket.off("new_message", handleNewMessage);
+      socket.off("message:new", handleMessageNew);
     };
-  }, [conversationId, userToken]);
+  }, [conversationId, userToken, isConnected, socket]);
 
   const sendMessage = useCallback((messages: IMessage[]) => {
     const message = messages[0];

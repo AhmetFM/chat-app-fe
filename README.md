@@ -87,6 +87,7 @@ The project is still under active development.
   - [ ] Read receipts
   - [ ] Typing indicators
 - [ ] 🔔 Push notifications
+- [ ] Update Android UI
 - [ ] 🧪 Testing
 
 ---

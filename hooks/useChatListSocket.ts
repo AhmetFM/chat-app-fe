@@ -1,14 +1,17 @@
 import { useActiveChat } from "@/context/ActiveChatContext";
 import { useChatContext } from "@/context/ChatsContext";
-import { socket } from "@/utils/socket";
+import { useSocket } from "@/context/SocketContext";
 import { useEffect } from "react";
 
 export const useChatListSocket = () => {
   const { setChats } = useChatContext();
   const { activeChatId } = useActiveChat();
+  const { socket, isConnected } = useSocket();
 
   useEffect(() => {
-    socket.on("message:new", ({ conversation }) => {
+    if (!isConnected) return;
+
+    const handleMessageNew = ({ conversation }: { conversation: any }) => {
       setChats((prev) =>
         prev.map((chat) =>
           chat.id === conversation.id
@@ -22,10 +25,12 @@ export const useChatListSocket = () => {
             : chat
         )
       );
-    });
+    };
+
+    socket.on("message:new", handleMessageNew);
 
     return () => {
-      socket.off("message:new");
+      socket.off("message:new", handleMessageNew);
     };
-  }, [socket, activeChatId]);
+  }, [socket, isConnected, activeChatId, setChats]);
 };

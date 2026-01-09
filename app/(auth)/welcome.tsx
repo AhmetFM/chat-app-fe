@@ -13,7 +13,7 @@ const SignIn = () => {
     <SafeAreaView className="flex-1 items-center justify-between dark:bg-black">
       <View className="w-full items-center px-6 mt-20">
         <Text className="text-4xl font-bold text-black dark:text-white text-center">
-          Welcome to Chatter
+          Welcome to Chat App
         </Text>
         <Text className="mt-4 text-center text-gray-600 dark:text-gray-300">
           There is no email sign-in. Continue with your phone number like

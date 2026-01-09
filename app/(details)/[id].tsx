@@ -141,6 +141,9 @@ const Chat = () => {
                 borderWidth: 0,
                 alignItems: "center",
               }}
+              textStyle={{
+                color: colorScheme === "dark" ? "white" : "black",
+              }}
               {...props}
             />
           )}

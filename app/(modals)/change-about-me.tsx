@@ -32,12 +32,12 @@ const ChangeAboutMe = () => {
   ];
 
   const handleUpdateAbout = (aboutMe: string) => {
-    setUser({ ...user, aboutMe: aboutMe });
+    setUser({ ...user!, aboutMe: aboutMe });
     updateUser({ aboutMe: aboutMe }).then(() => router.back());
   };
 
   useEffect(() => {
-    setAboutMe(user.aboutMe);
+    setAboutMe(user?.aboutMe!);
   }, []);
 
   return (
@@ -52,7 +52,7 @@ const ChangeAboutMe = () => {
           headerRight: () => (
             <TouchableOpacity
               className="disabled:opacity-25"
-              disabled={aboutMe === user.name || aboutMe.length == 0}
+              disabled={aboutMe === user?.name || aboutMe.length == 0}
               onPress={() => handleUpdateAbout(aboutMe)}
             >
               <Text className="dark:text-white">Save</Text>

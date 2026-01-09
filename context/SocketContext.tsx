@@ -6,6 +6,7 @@ type SocketContextType = {
   socket: typeof socket;
   connect: () => void;
   disconnect: () => void;
+  isConnected: boolean;
 };
 
 const SocketContext = createContext<SocketContextType | null>(null);
@@ -13,26 +14,75 @@ const SocketContext = createContext<SocketContextType | null>(null);
 export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
   const { userToken } = useContext(AuthContext);
   const connected = useRef(false);
+  const [isConnected, setIsConnected] = React.useState(false);
 
   useEffect(() => {
-    if (userToken && !connected.current) {
-      socket.auth = { token: userToken };
-      socket.connect();
+    // Set up socket event listeners
+    const onConnect = () => {
+      //console.log("Socket connected");
+      setIsConnected(true);
       connected.current = true;
+    };
+
+    const onDisconnect = (reason: string) => {
+      console.log("Socket disconnected:", reason);
+      setIsConnected(false);
+      connected.current = false;
+    };
+
+    const onConnectError = (error: Error) => {
+      console.error("Socket connection error:", error);
+      setIsConnected(false);
+      connected.current = false;
+    };
+
+    socket.on("connect", onConnect);
+    socket.on("disconnect", onDisconnect);
+    socket.on("connect_error", onConnectError);
+
+    // Handle authentication and connection
+    if (userToken) {
+      // Set auth token - format depends on your backend
+      // Common formats: { token: userToken } or { token: `Bearer ${userToken}` }
+      socket.auth = { token: userToken };
+
+      // Only connect if not already connected
+      if (!socket.connected && !connected.current) {
+        console.log("Connecting socket with token...");
+        socket.connect();
+      }
+    } else {
+      // Disconnect if no token
+      if (socket.connected || connected.current) {
+        console.log("Disconnecting socket - no token");
+        socket.disconnect();
+        connected.current = false;
+        setIsConnected(false);
+      }
     }
 
-    if (!userToken && connected.current) {
-      socket.disconnect();
-      connected.current = false;
-    }
+    // Cleanup
+    return () => {
+      socket.off("connect", onConnect);
+      socket.off("disconnect", onDisconnect);
+      socket.off("connect_error", onConnectError);
+    };
   }, [userToken]);
 
   return (
     <SocketContext.Provider
       value={{
         socket,
-        connect: () => socket.connect(),
-        disconnect: () => socket.disconnect(),
+        connect: () => {
+          if (userToken) {
+            socket.auth = { token: userToken };
+            socket.connect();
+          }
+        },
+        disconnect: () => {
+          socket.disconnect();
+        },
+        isConnected,
       }}
     >
       {children}
